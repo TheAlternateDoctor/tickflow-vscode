@@ -1,0 +1,21 @@
+{
+    "name": "tickflow",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": ">=0.9.0-pre.1"
+    },
+    "publisher": "TheAltDoc",
+    "contributes": {
+        "languages": [{
+            "id": "tickflow",
+            "aliases": ["Tickflow", "tickflow", "TickFlow"],
+            "extensions": [".tickflow"],
+            "configuration":"./syntaxes/tickflow-language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "tickflow",
+            "scopeName": "source.tickflow",
+            "path": "./syntaxes/tickflow.tmLanguage.json"
+        }]
+    }
+}
