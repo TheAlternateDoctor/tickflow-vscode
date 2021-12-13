@@ -1,0 +1,18 @@
+{
+    "scopeName" : "source.tickflow",
+    "fileTypes" : ["tickflow"],
+    "foldingStartMarker" : "(.*:(\t|\n))|(\bif\b)",
+    "foldingStopMarker" : "stop|return|endif",
+    "patterns" : [
+        {
+            "name" : "comment.line.double-slash",
+            "begin" : "//",
+            "end" : "\n"
+        },
+        {
+            "name" : "entity.name.function",
+            "begin" : ".*:(\t|\n)",
+            "end" : "return|stop"
+        }
+    ]
+}
