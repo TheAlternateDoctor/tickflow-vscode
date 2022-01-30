@@ -5,14 +5,30 @@
     "foldingStopMarker" : "stop|return|endif",
     "patterns" : [
         {
-            "name" : "comment.line.double-slash",
-            "begin" : "//",
-            "end" : "\n"
+            "include": "#comments"
         },
         {
-            "name" : "entity.name.function",
-            "begin" : ".*:(\t|\n)",
-            "end" : "return|stop"
+            "name": "entity.name.function.tickflow",
+            "match": "^.*:\\s*$"
+        },
+        {
+            "name": "meta.command.tickflow",
+            "match": "^.*$",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "name": "keyword.other.cmdname.tickflow"
+                }
+            ]
         }
-    ]
+    ],
+    "repository": {
+        "comments": {
+            "name": "comment.line.tickflow",
+            "begin": "//",
+            "end": "$"
+        }
+    }
 }
