@@ -9,17 +9,20 @@
         },
         {
             "name": "entity.name.function.tickflow",
-            "match": "^.*:\\s*$"
+            "start": "^",
+            "end": ":\\s*"
         },
         {
             "name": "meta.command.tickflow",
-            "match": "^.*$",
+            "start": "^",
+            "end": "$",
             "patterns": [
                 {
-                    "include": "#comments"
+                    "name": "keyword.other.cmdname.tickflow",
+                    "match": "^\\s*[^:<\\s]*"
                 },
                 {
-                    "name": "keyword.other.cmdname.tickflow"
+                    "include": "#comments"
                 }
             ]
         }
