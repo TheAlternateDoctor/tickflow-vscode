@@ -1,79 +1,89 @@
 {
   "name": "tickflow-vscode",
-	"displayName": "Tickflow",
-	"description": "Syntax Highlighting and building of Rhythm Heavn's Tickflow scripting language",
-	"publisher":"TheAlternateDoctor",
+  "displayName": "Tickflow",
+  "description": "Syntax Highlighting and building of Rhythm Heavn's Tickflow scripting language",
+  "publisher": "TheAlternateDoctor",
   "version": "0.0.1",
-	"engines": {
-		"vscode": "^1.54.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-        "onCommand:tickflow-vscode.helloWorld"
-	],
-	"main": "./extension.js",
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
-	"devDependencies": {
-        "@types/vscode": "^1.54.0",
-        "@types/glob": "^7.2.0",
-        "@types/mocha": "^9.1.0",
-        "@types/node": "14.x",
-        "eslint": "^8.11.0",
-        "glob": "^7.2.0",
-        "mocha": "^9.2.2",
-        "typescript": "^4.5.5",
-        "@vscode/test-electron": "^2.1.3"
-    },"contributes": {
-      "languages": [
-        {
-          "id": "tickflow",
-          "extensions": [
-            ".tickflow",
-            ".tkf"
-          ],
-          "configuration": "./syntaxes/tickflow-config.json"
-        }
-      ],
-      "grammars": [
-        {
-          "language": "tickflow",
-          "scopeName": "source.tickflow",
-          "path": "./syntaxes/tickflow.tmLanguage.json"
-        }
-      ],
-      "configuration": {
-        "title": "Tickflow",
-        "properties": {
-          "tickflow.tickompilerPath": {
-            "type": "string",
-            "default": "./tickompiler.jar",
-            "description": "Specifies the path of Tickompiler."
-          },
-          "tickflow.basebinPath": {
-            "type": "string",
-            "default": "./base.bin",
-            "description": "Specifies the path of the base.bin to use with Tickompiler."
-          },
-          "tickflow.citraFolder": {
-            "type": "string",
-            "default": "%appdata%\\Citra",
-            "description": "Specifies the path to Citra's root folder."
-          }
-        }
-      },
-      "commands": [
-        {
-          "command": "tickflow.citraBuild",
-          "title": "Build and move to Citra",
-          "category": "Tickflow"
-        }
-      ]
-    }
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:tickflow-vscode.citraBuild",
+    "onLanguage:tickflow"
+  ],
+  "main": "./extension",
+  "scripts": {
+    "vscode:prepublish": "npm run -S esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./extension.js --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run -S esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run -S esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./",
 
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js",
+    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.54.0",
+    "@vscode/test-electron": "^2.1.3",
+    "esbuild": "^0.14.36",
+    "eslint": "^8.11.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.2",
+    "typescript": "^4.5.5"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "tickflow",
+        "extensions": [
+          ".tickflow",
+          ".tkf"
+        ],
+        "configuration": "./syntaxes/tickflow-config.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "tickflow",
+        "scopeName": "source.tickflow",
+        "path": "./syntaxes/tickflow.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "Tickflow",
+      "properties": {
+        "tickflow.tickompilerPath": {
+          "type": "string",
+          "default": "./tickompiler.jar",
+          "description": "Specifies the path of Tickompiler."
+        },
+        "tickflow.basebinPath": {
+          "type": "string",
+          "default": "./base.bin",
+          "description": "Specifies the path of the base.bin to use with Tickompiler."
+        },
+        "tickflow.citraFolder": {
+          "type": "string",
+          "default": "%appdata%\\Citra",
+          "description": "Specifies the path to Citra's root folder."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "tickflow.citraBuild",
+        "title": "Build and move to Citra",
+        "when": "editorLangId == tickflow",
+        "category": "Tickflow"
+      }
+    ]
+  }
 }
