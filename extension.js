@@ -44,15 +44,15 @@ function activate(context) {
 
 		fs.access(tickompiler, fs.constants.F_OK, (err)=>{
 			if(err != null)
-				vscode.window.showInformationMessage("Tickompiler not found!")
+				vscode.window.showErrorMessage("Tickompiler not found!")
 		})
 		fs.access(base, fs.constants.F_OK, (err)=>{
 			if(err != null)
-				vscode.window.showInformationMessage("base.bin not found!")
+				vscode.window.showErrorMessage("base.bin not found!")
 		})
 		fs.access(citra, fs.constants.F_OK, (err)=>{
 			if(err != null)
-				vscode.window.showInformationMessage("Citra's folder does not exist!")
+				vscode.window.showErrorMessage("Citra's folder does not exist!")
 		})
 		// //We can execute the code now
 		let java =""
@@ -60,13 +60,26 @@ function activate(context) {
 			java = "java --add-opens java.base/java.lang=ALL-UNNAMED -jar "
 		else
 			java = "java -jar "
-		let command = java+tickompiler+' c "'+file+'" "'+current+delimiter+'bin'+delimiter+'"';
+		let bin = '"'+current+delimiter+'bin'+delimiter+'"'
+		let command = java+tickompiler+' c "'+file+'" "'+bin;
 		exec(command,
 		function (error, stdout, stderr) {
 			vscode.window.showInformationMessage(command);
 			console.log('stdout: ' + stdout);
 			console.log('stderr: ' + stderr);
 			if (error !== null) {
+				vscode.window.showErrorMessage("Couldn't compile!")
+				console.log(error);
+			}
+		});
+		command = java+tickompiler+' p '+bin+' '+base+' '+citra+delimiter+'sdmc'+delimiter+'rhmm'+delimiter+'C00.bin"'
+		exec(command,
+		function (error, stdout, stderr) {
+			vscode.window.showInformationMessage(command);
+			console.log('stdout: ' + stdout);
+			console.log('stderr: ' + stderr);
+			if (error !== null) {
+				vscode.window.showErrorMessage("Couldn't compile!")
 				console.log(error);
 			}
 		});
