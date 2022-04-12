@@ -17,6 +17,21 @@
             "language": "tickflow",
             "scopeName": "source.tickflow",
             "path": "./syntaxes/tickflow.tmLanguage.json"
-        }]
+        }],
+        "configuration": {
+          "title": "Tickflow",
+          "properties": {
+            "tickflow.tickompilerPath": {
+              "type": "string",
+              "default": "./tickompiler.jar",
+              "description": "Specifies the path of Tickompiler."
+            },
+            "tickflow.basebinPath": {
+              "type": "string",
+              "default": "./base.bin",
+              "description": "Specifies the path of the base.bin to use with Tickompiler."
+            }
+          }
+        }
     }
 }
