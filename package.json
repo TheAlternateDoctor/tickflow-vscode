@@ -74,6 +74,11 @@
           "type": "string",
           "default": "%appdata%\\Citra",
           "description": "Specifies the path to Citra's root folder."
+        },
+        "tickflow.java16": {
+          "type": "boolean",
+          "default": false,
+          "description": "Set to true if your default Java install is Java 16+."
         }
       }
     },
