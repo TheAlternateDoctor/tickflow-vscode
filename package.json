@@ -42,7 +42,7 @@
   "contributes": {
     "languages": [
       {
-        "id": "tickflow",
+        "id": "Tickflow",
         "extensions": [
           ".tickflow",
           ".tkf"
@@ -52,7 +52,7 @@
     ],
     "grammars": [
       {
-        "language": "tickflow",
+        "language": "Tickflow",
         "scopeName": "source.tickflow",
         "path": "./syntaxes/tickflow.tmLanguage.json"
       }

@@ -9,8 +9,7 @@
         },
         {
             "name": "entity.name.function.tickflow",
-            "start": "^",
-            "end": ":\\s*"
+            "match": "^\\s*[^/:<\\s]+:\\s*$"
         },
         {
             "name": "meta.command.tickflow",
@@ -18,11 +17,18 @@
             "end": "$",
             "patterns": [
                 {
-                    "name": "keyword.other.cmdname.tickflow",
-                    "match": "^\\s*[^:<\\s]*"
+                    "include": "#comments"
                 },
                 {
-                    "include": "#comments"
+                    "include": "#strings"
+                },
+                {
+                    "name": "constant.numeric.tickflow",
+                    "match": "(?<=[^a-zA-Z_])[0-9]+(?=[^a-zA-Z_])"
+                },
+                {
+                    "name": "keyword.other.cmdname.tickflow",
+                    "match": "^\\s*[^/:<\\s]*"
                 }
             ]
         }
@@ -32,6 +38,11 @@
             "name": "comment.line.tickflow",
             "begin": "//",
             "end": "$"
+        },
+        "strings" : {
+            "name": "string.quoted.double.tickflow",
+            "begin": "(u)?\"",
+            "end": "\""
         }
     }
 }
